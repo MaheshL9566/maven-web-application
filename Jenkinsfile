@@ -17,6 +17,14 @@ node ('master')
   {
    git branch: 'master', credentialsId: '65fb834f-a83b-4fe7-8e11-686245c47a65', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
  }
+   
+  stage('SonarQube Analysis') 
+  {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+  }
+}
  
  stage("Build")
  {
